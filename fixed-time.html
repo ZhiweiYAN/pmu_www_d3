@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>PMU Sniff Data Monitor</title>
+    <meta name="description" content="PMU Sniff Data Monitor">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="css/bijou.min.css">
+    <link rel="stylesheet" href="css/pmu-sniff-display.css">
+</head>
+
+<script src="./js/d3.v3.js" charset="utf-8"></script>
+<script src="./js/fixed-time.js" charset="utf-8"></script>
+<script src="./js/common-funcs.js" charset="utf-8"></script>
+
+<body>
+<div class='navbar fixed'>
+    <div class='container'>
+        <h4 class='pull-left'>PMU Sniff Data Monitor </h4>
+        <ul class='pull-right'>
+            <li><a href='http://192.168.1.101'>©2014 He Nan EPRI</a></li>
+            <li><a href='JEROD DOT YAN AT GMAIL DOT COM'>About</a></li>
+        </ul>
+    </div>
+</div>
+<div class='container'>
+    <div class='banner row'>
+        <div class='span ten'>
+            <!--<h4>History (Fixed Time) Curves</h4>-->
+            <h4>历史曲线（固定时间间隔）</h4>
+        </div>
+    </div>
+    <div id='real-time-curve'>
+        <table class='table table-striped table-bordered' width='100%'>
+            <tr  hidden="true">
+                <td>画布宽度</td>
+                <td><input class='input' id='CanvasWidth'  value='1024'/>像素</td>
+
+                <td>画布高度</td>
+                <td><input class='input' id='CanvasHeight' value='250'/>像素</td>
+            </tr>
+
+            <tr  hidden="true">
+                <td>数据库IP及端口</td>
+                <td><input  class="input" id='DBIPAddress' value='192.168.1.101:8888'/></td>
+                <td>数据库表名</td>
+                <td><input  class="input" id='DBTableName' value='pmu_avg'/></td>
+            </tr>
+            <tr>
+                <td>X 轴字段名</td>
+                <td><input class="input" id='XAxialFieldName' value='packet_time' disabled='true'/></td>
+
+                <td>Y 轴字段名</td>
+                <td><input type="radio" name="YAxialFieldName" id='frequency_001' value="frequency_001" checked="true">频率一
+                    <input type="radio" name="YAxialFieldName" id='frequency_002' value="frequency_002"> 频率二 <br/>
+                    <input type="radio" name="YAxialFieldName" id='power_001' value="power_001" checked="true">功率一
+                    <input type="radio" name="YAxialFieldName" id='power_002' value="power_002"> 功率二
+                </td>
+ <!--               <td>
+                    <input list="browsers" name="browser" id='YAxialFieldName' value="power_001" >
+                    <datalist id="browsers">
+                        <option value="frequency_001">
+                        <option value="frequency_002">
+                        <option value="power_001">
+                        <option value="power_002">
+                       </datalist>
+                </datalist>
+                </td>-->
+            </tr>
+
+            <tr  hidden="true">
+                <td>Y 轴下限值</td>
+                <td><input  class="input" id='YAxialBottomLimit' value='49.95'/></td>
+
+                <td>Y 轴上限值</td>
+                <td><input  class="input" id='YAxialTopLimit' value='50.05'/></td>
+            </tr>
+            <tr  hidden="true">
+                <td>Y 轴 「正常值」 下限</td>
+                <td><input  class="input" id='YAxialIntervalBottomLimit' value='49.967'/></td>
+
+                <td>Y 轴 「正常值」 上限值</td>
+                <td><input  class="input" id='YAxialIntervalTopLimit' value='50.033'/></td>
+            </tr>
+            <tr>
+                <td>采样起始时刻</td>
+                <td><input class="input" id='StartTime'  value='2013-12-18 00:00:00'/></td>
+
+                <td>采样终止时刻</td>
+                <td><input class="input" id='EndTime'  value='2013-12-18 00:15:00'/></td>
+            </tr>
+            <tr>
+                <td><br/>
+                    <button class='button danger small' onclick='SetCurrentLastTenMinutesInterval()'> 设置为前十分钟</button>
+                </td>
+                  <td><br/>
+                    <button class='button success small' onclick='LoadCurve()'> 加载历史曲线</button>
+                </td>
+                <td hidden="hidden">
+                    <button id='save' class='button success small' onclick="SaveImage()"> SAVE </button>
+                </td>
+            </tr>
+        </table>
+        <div id="canvas">
+
+        </div>
+        <div id="bottom">.</div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<head>
+    <title>PMU Sniff Data Monitor</title>
+    <meta name="description" content="PMU Sniff Data Monitor">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="css/bijou.min.css">
+    <link rel="stylesheet" href="css/pmu-sniff-display.css">
+</head>
+
+<script src="./js/d3.v3.js" charset="utf-8"></script>
+<script src="./js/check-table.js" charset="utf-8"></script>
+<script src="./js/common-funcs.js" charset="utf-8"></script>
+<script src="./js/file-saveas.js" charset="utf-8"></script>
+<script src="./js/Blob.js"></script>
+
+
+<body>
+<div class='navbar fixed'>
+    <div class='container'>
+        <h4 class='pull-left'>PMU Sniff Data Monitor </h4>
+        <ul class='pull-right'>
+            <li><a href='http://192.168.1.101'>©2014 He Nan EPRI</a></li>
+            <li><a href='JEROD DOT YAN AT GMAIL DOT COM'>About</a></li>
+        </ul>
+    </div>
+</div>
+<div class='container'>
+    <div class='banner row'>
+        <div class='span ten'>
+            <h4>「考核结果」表</h4>
+        </div>
+    </div>
+    <div id='check-results-table'>
+        <table class='table table-striped table-bordered' width='100%'>
+            <tr>
+                <td >数据库IP及端口</td>
+                <td><input class="input" id='DBIPAddress' value='192.168.1.101:8888' disabled='true'/></td>
+                <td>机组名</td>
+                <td><input type="radio" name="DBTableName" id='DBTableName_001' value="pmu_chk_001" checked="true">机组一
+                    <input type="radio" name="DBTableName" id='DBTableName_002' value="pmu_chk_002">机组二
+                </td>
+            </tr>
+            <tr>
+                <td>采样起始时刻</td>
+                <td><input class="input" id='StartTime' value='2013-12-16 00:15:00'/></td>
+
+                <td>采样终止时刻</td>
+                <td><input class="input" id='EndTime' value='2013-12-18 01:18:00'/></td>
+            </tr>
+            <tr>
+                <td><br/>
+                    <button class='button danger small' onclick='SetCurrentMonth()'> 设置时间区间为本月</button>
+                </td>
+                <td><br/>
+                    <button class='button success small' onclick='LoadCheckTable()'> 加载考核表</button>
+                </td>
+
+                <td><br/>
+                    <button class='button success small' onclick='SaveCheckTable()'> 另存考核表为文件</button>
+                </td>
+            </tr>
+        </table>
+
+        <div id='detail'>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
